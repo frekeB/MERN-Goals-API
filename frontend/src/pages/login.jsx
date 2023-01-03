@@ -1,9 +1,65 @@
-import React from 'react'
+import { useState, useEffect } from "react";
+import { FaSignInAlt } from "react-icons/fa";
 
-function login() {
+function Login() {
+  const [formData, SetFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const {email, password} = formData;
+
+  const onChange = (e) => {
+    SetFormData((prevState)=>({
+      ...prevState,
+      [e.target.name]:e.target.value,
+    }))
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+  }
+
   return (
-    <div>login</div>
-  )
+    <>
+      <section className="heading">
+        <hi>
+          <FaSignInAlt /> Login
+        </hi>
+        <p> Login and Start setting goals</p>
+      </section>
+      <section className="form">
+        <form onSubmit={onSubmit}>
+        
+          <div className="form-group">
+            <input
+              type="email"
+              className="form control"
+              id="email"
+              name="email"
+              value={email}
+              placeholder="Example@email."
+              onChange={onChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              className="form control"
+              id="password"
+              name="password"
+              value={password}
+              placeholder="Enter Password"
+              onChange={onChange}
+            />
+          </div>
+          <div className="form-group">
+            <button type="submit" className="btn btn-block">Submit</button>
+          </div>
+        </form>
+      </section>
+    </>
+  );
 }
 
-export default login
+export default Login;
