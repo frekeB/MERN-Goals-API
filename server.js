@@ -1,11 +1,11 @@
 const express = require('express')
 const dotenv  = require('dotenv').config()
 const colors = require('colors')
-const {errorHandler} = require('./middleware/errorMiddleware')
-const connectDB = require('./config/db')
+const {errorHandler} = require('./backend/middleware/errorMiddleware')
+const connectDB = require('./backend/config/db')
 const port = process.env.PORT || 5001
-const goalRoute = require('./routes/goalRoutes')
-const userRoute = require('./routes/userRoutes')
+const goalRoute = require('./backend/routes/goalRoutes')
+const userRoute = require('./backend/routes/userRoutes')
 var cors = require("cors")
 
 
