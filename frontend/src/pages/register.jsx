@@ -25,10 +25,10 @@ function Register() {
   )
 
 
-useEffect({
-  if(isError)
+// useEffect({
+//   // if(isError)
 
-},[user, isError, isSuccess, message, navigate, dispatch]) 
+// },[user, isError, isSuccess, message, navigate, dispatch]) 
 
 
   const onChange = (e) => {
@@ -53,14 +53,15 @@ useEffect({
       }
       dispatch(register(userData))
     }
+    navigate("/login")
   }
 
   return (
     <>
       <section className="heading">
-        <hi>
+        <h1>
           <FaUser /> Register
-        </hi>
+        </h1>
         <p> Please create an account</p>
       </section>
       <section className="form">

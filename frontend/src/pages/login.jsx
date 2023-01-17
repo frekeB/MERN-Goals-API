@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
 import { FaSignInAlt } from "react-icons/fa";
+import {login, reset} from "../features/auth/authSlice"
+import {useSelector, useDispatch} from 'react-redux'
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [formData, SetFormData] = useState({
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const {email, password} = formData;
 
@@ -18,14 +24,23 @@ function Login() {
 
   const onSubmit = (e) => {
     e.preventDefault()
-  }
+
+      const userData = {
+        email,
+        password,
+      }
+      dispatch(login(userData))
+
+      navigate("/")
+    }
+  
 
   return (
     <>
       <section className="heading">
-        <hi>
+        <h1>
           <FaSignInAlt /> Login
-        </hi>
+        </h1>
         <p> Login and Start setting goals</p>
       </section>
       <section className="form">
