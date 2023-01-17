@@ -9,40 +9,45 @@ const User  = require('../models/userModel')
 //access public
 
 const registerUser = asyncHandler(async (req, res) => {
-    const {name, email,password,phone} = req.body
-    if(!name || !email || !password || !phone){
-        res.status(400)
-        throw new Error('Please add all fields')
-    }
-    ///check if user exists
-    const userExists = await User.findOne({email})
-
-    if(userExists){
-        res.status(400)
-        throw new Error('User already exists')
-    }
-
-    // Hash password
-    const salt = await bcrypt.genSalt(10)
-    const hashedpassword = await bcrypt.hash(password,salt)
-
-    // create user
-    const user = await User.create({
-        name,
-        email,
-        password:hashedpassword,
-        phone,
-    })
-    if(user){
-        res.status(201).json({
-            _id: user.id,
-            name: user.name,
-            email: user.email,
-            phone: user.phone,
-            token: generateToken(user._id)
-
+    console.log("here3")
+    try{
+        const {name, email,password} = req.body
+        if(!name || !email || !password){
+            console.log("here1")
+            res.status(400)
+            throw new Error('Please add all fields')
+        }
+        ///check if user exists
+        const userExists = await User.findOne({email})
+        console.log("here2")
+        if(userExists){
+            res.status(400)
+            throw new Error('User already exists')
+        }
+    
+        // Hash password
+        const salt = await bcrypt.genSalt(10)
+        const hashedpassword = await bcrypt.hash(password,salt)
+    
+        // create user
+        const user = await User.create({
+            name,
+            email,
+            password:hashedpassword,
+            // phone,
         })
-    } else {
+        if(user){
+            res.status(201).json({
+                _id: user.id,
+                name: user.name,
+                email: user.email,
+                // phone: user.phone,
+                token: generateToken(user._id)
+    
+            })
+        }
+    } catch (err) {
+        console.log(err)
         res.status(400)
         throw new Error ('Invalid user data')
     }

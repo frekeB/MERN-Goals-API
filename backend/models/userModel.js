@@ -15,13 +15,14 @@ const userSchema = mongoose.Schema({
         require: [true, 'Please add a password'],
     
     },
-   phone:{
-        type:String,
-        require: [true, 'Please add a phone number']
-    },
+   
+//    phone:{
+//         type:String,
+//         require: [true, 'Please add a phone number']
+//     },
 },
 {
     timestamps: true,
 })
 
-module.exports =mongoose.model('User', userSchema)
+module.exports = mongoose.model('User', userSchema)
